@@ -2,22 +2,22 @@
 #include <DHT.h>
 #include <math.h>
 
-// LCD 16x2
+
 LiquidCrystal lcd(8, 7, 6, 5, 4, 3); // RS, E, D4, D5, D6, D7
 
-// DHT11
+
 #define DHTPIN 2
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
 
-// Termistor NTC
+
 #define TERMISTOR A0
 #define RESISTOR 10000.0
 #define NOMINAL_RESISTANCE 10000.0
 #define NOMINAL_TEMPERATURE 25.0
 #define B_COEFFICIENT 3950.0
 
-// LEDs
+
 #define LED_HUM_GREEN 10
 #define LED_HUM_RED 11
 #define LED_TEMP_GREEN 12
@@ -28,7 +28,6 @@ void setup() {
   dht.begin();
   lcd.print("Sistema OK");
   
-  // Configurar LEDs como saída
   pinMode(LED_HUM_GREEN, OUTPUT);
   pinMode(LED_HUM_RED, OUTPUT);
   pinMode(LED_TEMP_GREEN, OUTPUT);
@@ -43,7 +42,6 @@ void loop() {
   float hum = dht.readHumidity();
   float tempDHT = dht.readTemperature();
 
-  // Ler termistor NTC
   int adc = analogRead(TERMISTOR);
   float resistance = RESISTOR / ((1023.0 / adc) - 1.0);
   float tempNTC = resistance / NOMINAL_RESISTANCE;
@@ -53,7 +51,7 @@ void loop() {
   tempNTC = 1.0 / tempNTC;
   tempNTC -= 273.15;
 
-  // Mostrar no LCD
+
   lcd.setCursor(0, 0);
   lcd.print("T:");
   lcd.print(tempDHT, 1);
@@ -66,7 +64,6 @@ void loop() {
   lcd.print(tempNTC, 1);
   lcd.print("C   ");
 
-  // Controle LEDs Humidade
   if(hum <=70.0){
     digitalWrite(LED_HUM_GREEN, HIGH);
     digitalWrite(LED_HUM_RED, LOW);
@@ -75,7 +72,7 @@ void loop() {
     digitalWrite(LED_HUM_RED, HIGH);
   }
 
-  // Controle LEDs Temperatura
+ 
   if(tempNTC >= 20.0 && tempNTC <= 30.0){
     digitalWrite(LED_TEMP_GREEN, HIGH);
     digitalWrite(LED_TEMP_RED, LOW);
