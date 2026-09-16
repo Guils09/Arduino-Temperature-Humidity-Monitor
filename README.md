@@ -20,7 +20,7 @@ Blue LED → ON only if both green LEDs are on
 - 4 LEDs (2 green, 2 red)
 - 1 blue LED, 2 × 2N3904
 - resistors
- only doing the gate in hardware because my teatcher told me to tinker with gates fisicly
+ Implementing the logic gate using only transistors in hardware, as my teacher instructed me to experiment with physical gate circuits.
 
 ![g2](https://github.com/user-attachments/assets/b65de2ce-cb0f-49df-9808-f0bc038ac460)
 ![g1](https://github.com/user-attachments/assets/c309e9c9-e15d-41f9-9fbc-bcd5c53765dd)
